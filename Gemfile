@@ -15,6 +15,7 @@ gem 'rails-i18n'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
   gem 'pry-byebug'
   gem 'sqlite3'
 end
