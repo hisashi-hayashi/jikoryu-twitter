@@ -3,5 +3,5 @@ ja:
     attributes:
       user:
         email: 'メールアドレス'
-        crypted_password: 'パスワード'
+        password: 'パスワード'
         name: '名前'
