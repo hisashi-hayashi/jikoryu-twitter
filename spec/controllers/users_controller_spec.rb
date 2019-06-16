@@ -17,7 +17,7 @@ describe UsersController do
         }
       end
       it '登録できること' do
-        is_expected.to redirect_to(action: :index)
+        is_expected.to redirect_to(new_login_path)
         expect(flash.notice).to eq('登録が完了しました。')
 
         expect(User.count).to eq(1)
@@ -53,6 +53,9 @@ describe UsersController do
   end
 
   describe '#update' do
+    before do
+      allow_any_instance_of(described_class).to receive(:check_admin_and_redirect_login_path)
+    end
     subject do
       put(:update, params: put_params)
     end
@@ -77,7 +80,7 @@ describe UsersController do
         }
       end
       it '更新できること' do
-        is_expected.to redirect_to(action: :index)
+        is_expected.to redirect_to(users_path)
         expect(flash.notice).to eq('更新が完了しました。')
         expect(User.first).to have_attributes(
           name: 'name_update',
@@ -128,6 +131,9 @@ describe UsersController do
   end
 
   describe 'destroy' do
+    before do
+      allow_any_instance_of(described_class).to receive(:check_admin_and_redirect_login_path)
+    end
     subject do
       delete(:destroy, params: delete_params)
     end

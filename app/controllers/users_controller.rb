@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin_and_redirect_login_path, only: %i(index edit update destroy)
 
   def index
     @users = User.all
@@ -15,35 +15,35 @@ class UsersController < ApplicationController
 
     @user.save
     flash[:notice] = '登録が完了しました。'
-    redirect_to action: :index
+    redirect_to(new_login_path)
   end
 
   def edit
-    @user = current_user
+    @user = selected_user
   end
 
   def update
-    @user = current_user
+    @user = selected_user
     @user.assign_attributes(user_params)
     return render :edit if @user.invalid?
 
     @user.save
     flash[:notice] = '更新が完了しました。'
-    redirect_to action: :index
+    redirect_to(users_path)
   end
 
   def destroy
     begin
-      current_user.destroy
+      selected_user.destroy
     rescue ActiveRecord::RecordNotFound; end
 
     flash[:notice] = '削除が完了しました。'
-    redirect_to action: :index
+    redirect_to(users_path)
   end
 
   private
 
-  def current_user
+  def selected_user
     User.find(params.permit(:id)[:id])
   end
 
