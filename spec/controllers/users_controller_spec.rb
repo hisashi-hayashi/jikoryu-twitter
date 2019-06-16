@@ -12,7 +12,7 @@ describe UsersController do
           user: {
             name: 'name',
             email: 'email',
-            crypted_password: 'password'
+            password: 'password'
           }
         }
       end
@@ -24,7 +24,6 @@ describe UsersController do
         expect(User.first).to have_attributes(
           name: 'name',
           email: 'email',
-          crypted_password: 'password'
         )
       end
     end
@@ -35,7 +34,7 @@ describe UsersController do
           user: {
             name: '',
             email: '',
-            crypted_password: ''
+            password: ''
           }
         }
       end
@@ -61,9 +60,10 @@ describe UsersController do
       User.create(
         name: 'name',
         email: 'email',
-        crypted_password: 'password'
+        password: 'password'
       )
     end
+    let!(:before_password) { current_user.crypted_password }
 
     context '正常系' do
       let(:put_params) do
@@ -72,7 +72,7 @@ describe UsersController do
           user: {
             name: 'name_update',
             email: 'email_update',
-            crypted_password: 'password_update'
+            password: 'password_update'
           }
         }
       end
@@ -82,8 +82,8 @@ describe UsersController do
         expect(User.first).to have_attributes(
           name: 'name_update',
           email: 'email_update',
-          crypted_password: 'password_update'
         )
+        expect(User.first.crypted_password).to_not eq(before_password)
       end
     end
 
@@ -94,7 +94,7 @@ describe UsersController do
           user: {
             name: '',
             email: '',
-            crypted_password: ''
+            password: ''
           }
         }
       end
@@ -104,9 +104,8 @@ describe UsersController do
           is_expected.to render_template(:edit)
           expect(assigns[:user].errors.full_messages).to match_array(
             %w(
-            名前を入力してください
-            メールアドレスを入力してください
-            パスワードを入力してください
+              名前を入力してください
+              メールアドレスを入力してください
             )
           )
 
@@ -114,8 +113,8 @@ describe UsersController do
           expect(User.first).to have_attributes(
             name: 'name',
             email: 'email',
-            crypted_password: 'password'
           )
+          expect(User.first.crypted_password).to eq(before_password)
         end
       end
 
@@ -136,7 +135,7 @@ describe UsersController do
       User.create(
         name: 'name',
         email: 'email',
-        crypted_password: 'password'
+        password: 'password'
       )
     end
 
