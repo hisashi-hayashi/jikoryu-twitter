@@ -11,9 +11,16 @@ class ApplicationController < ActionController::Base
   def admin?
     current_user.try(:admin_flg)
   end
+  helper_method :admin?
 
   def check_admin_and_redirect_login_path
     return if login? && admin?
+    flash[:alert] = 'ログインしてください。'
+    redirect_to(new_login_path)
+  end
+
+  def check_login_and_redirect_login_path
+    return if login?
     flash[:alert] = 'ログインしてください。'
     redirect_to(new_login_path)
   end

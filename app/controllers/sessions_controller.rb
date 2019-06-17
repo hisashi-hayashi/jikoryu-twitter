@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   def create
     user = login(login_params[:email], login_params[:password])
     if user
-      redirect_to(users_path)
+      redirect_to(tweets_path)
     else
       flash[:alert] = 'ログインに失敗しました。'
       redirect_to(new_login_path)

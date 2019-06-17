@@ -18,7 +18,7 @@ describe SessionsController do
 
     context '正常系' do
       it 'ログインできること' do
-        is_expected.to redirect_to(users_path)
+        is_expected.to redirect_to(tweets_path)
         expect(session[:user_id]).to eq(user.id.to_s)
       end
     end

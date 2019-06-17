@@ -1,0 +1,5 @@
+<%= @tweet.user.name %>
+<%= @tweet.created_at.strftime('%Y-%m-%d %H:%M:%S') %>
+<%= @tweet.comment %>
+
+<%= link_to 'Back', tweets_path %>
