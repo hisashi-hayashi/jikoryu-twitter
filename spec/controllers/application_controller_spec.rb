@@ -99,4 +99,24 @@ describe ApplicationController do
       end
     end
   end
+
+  describe '#check_login_and_redirect_login_path' do
+    subject { controller.check_login_and_redirect_login_path }
+
+    context 'ログインしている場合' do
+      before { session[:user_id] = user.id }
+      it 'リダイレクトされないこと' do
+        is_expected.to_not redirect_to(new_login_path)
+        expect(flash.notice).to be_nil
+      end
+    end
+
+    context 'ログインしていない場合' do
+      it 'ログイン画面へリダイレクトされること' do
+        expect_any_instance_of(described_class).to receive(:redirect_to).with(new_login_path)
+        subject
+        expect(flash.alert).to eq('ログインしてください。')
+      end
+    end
+  end
 end

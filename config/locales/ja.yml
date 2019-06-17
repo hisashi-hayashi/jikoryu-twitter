@@ -5,3 +5,5 @@ ja:
         email: 'メールアドレス'
         password: 'パスワード'
         name: '名前'
+      tweet:
+        comment: 'コメント'
