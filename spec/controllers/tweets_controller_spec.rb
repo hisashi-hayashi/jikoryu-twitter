@@ -199,7 +199,7 @@ describe TweetsController do
       end
     end
 
-    context '損際しないidで削除した場合' do
+    context '存在しないidで削除した場合' do
       let(:delete_params) do
         { id: 999 }
       end
