@@ -1,5 +1,10 @@
-<%= @tweet.user.name %>
-<%= @tweet.created_at.strftime('%Y-%m-%d %H:%M:%S') %>
-<%= @tweet.comment %>
+<table>
+  <tbody>
+    <%= put_tweet(@tweet) %>
+    <% @tweet.reply.each do |tweet| %>
+      <%= put_tweet(tweet) %>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Back', tweets_path %>

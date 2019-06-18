@@ -2,7 +2,7 @@ class TweetsController < ApplicationController
   before_action :check_login_and_redirect_login_path
 
   def index
-    @tweets = Tweet.where(display_flg: true).order(created_at: :desc)
+    @tweets = Tweet.where(display_flg: true, parent_id: nil).order(created_at: :desc)
   end
 
   def show
@@ -10,7 +10,7 @@ class TweetsController < ApplicationController
   end
 
   def new
-    @tweet = Tweet.new
+    @tweet = Tweet.new(parent_id: parent_id)
   end
 
   def create
@@ -56,6 +56,10 @@ class TweetsController < ApplicationController
   end
 
   def tweet_params
-    params.require(:tweet).permit(:comment, :display_flg)
+    params.require(:tweet).permit(:comment, :display_flg, :parent_id)
+  end
+
+  def parent_id
+    params.dig(:tweet, :parent_id)
   end
 end

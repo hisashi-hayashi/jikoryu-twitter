@@ -3,21 +3,7 @@
 <table>
   <tbody>
     <% @tweets.each do |tweet| %>
-      <tr>
-        <td><%= tweet.user.name %></td>
-        <td><%= tweet.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
-        <td><%= tweet.comment %></td>
-        <td><%= link_to('詳細', tweet_path(tweet)) %></td>
-        <% if tweet.my_teet?(session[:user_id]) %>
-          <td><%= link_to 'ツイートを編集', edit_tweet_path(tweet) %></td>
-        <% end%>
-        <% if tweet.my_teet?(session[:user_id]) || admin? %>
-          <td><%= link_to 'ツイートを削除', tweet, method: :delete, data: { confirm: '削除してよろしいですか?' } %></td>
-        <% end %>
-        <% if admin? %>
-          <td><%= link_to('ツイートを非公開', tweet_path(tweet, { tweet: { display_flg: false } }), method: :patch, data: { confirm: '非公開にしてよろしいですか？' } ) %></td>
-        <% end %>
-      </tr>
+      <%= put_tweet(tweet) %>
     <% end %>
   </tbody>
 </table>
