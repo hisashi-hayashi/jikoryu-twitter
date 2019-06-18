@@ -9,8 +9,11 @@ describe TweetsController do
   describe '#index' do
     before do
       user.tweets.create(comment: 'comment')
+      # 表示フラグfalseは対象外
       user.tweets.create(comment: 'comment2', display_flg: false)
-      user.tweets.create(comment: 'comment3')
+      tweet = user.tweets.create(comment: 'comment3')
+      # リプライは対象外
+      tweet.children.create(user_id: other_user.id, comment: 'reply')
     end
     subject { get(:index) }
 
@@ -35,7 +38,8 @@ describe TweetsController do
     let(:post_params) do
       {
         tweet: {
-          comment: comment
+          comment: comment,
+          parent_id: 999
         }
       }
     end
