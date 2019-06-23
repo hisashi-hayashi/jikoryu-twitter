@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
-  def new; end
+  def new
+    redirect_to(tweets_path) if login?
+  end
 
   def create
     user = login(login_params[:email], login_params[:password])
