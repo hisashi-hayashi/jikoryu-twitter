@@ -1,10 +1,10 @@
 <table>
   <tbody>
-    <%= put_tweet(@tweet) %>
+    <%= put_tweet(@tweet, index_flg: false) %>
     <% @tweet.reply.each do |tweet| %>
-      <%= put_tweet(tweet) %>
+      <%= put_tweet(tweet, index_flg: false) %>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Back', tweets_path %>
+<%= link_to '戻る', tweets_path %>

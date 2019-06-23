@@ -1,15 +1,3 @@
-<h1>ツイート一覧</h1>
-
-<table>
-  <tbody>
-    <% @tweets.each do |tweet| %>
-      <%= put_tweet(tweet) %>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to('ツイート', new_tweet_path) %>
-<%= link_to('ユーザ管理', users_path) if admin? %>
-<%= link_to('ログアウト', logout_path, method: :delete) %>
+<% @tweets.each do |tweet| %>
+  <%= put_tweet(tweet) %>
+<% end %>

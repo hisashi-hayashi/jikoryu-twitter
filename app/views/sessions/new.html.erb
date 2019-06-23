@@ -1,19 +1,19 @@
 <h1>ログイン</h1>
 
 <%= form_tag login_path do %>
-  <div class="field">
-    <%= label_tag 'メールアドレス' %>
-    <%= text_field_tag :email %>
+  <div class='form-group col-md-4'>
+    <%= text_field_tag(:email, '', class: 'form-control', placeholder: 'メールアドレス') %>
   </div>
 
-  <div class="field">
-    <%= label_tag 'パスワード' %>
-    <%= password_field_tag :password %>
+  <div class='form-group col-md-4'>
+    <%= password_field_tag(:password, '', class: 'form-control', placeholder: 'パスワード') %>
   </div>
 
-  <div class="actions">
-    <%= submit_tag 'ログイン' %>
+  <div class='form-group col-md-4'>
+    <%= submit_tag('ログイン', class: 'btn btn-secondary') %>
   </div>
 <% end %>
 
-<%= link_to 'ユーザ登録', new_user_path %>
+<div>
+  <%= link_to 'ユーザ登録', new_user_path %>
+</div>

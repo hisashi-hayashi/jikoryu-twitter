@@ -1,7 +1,7 @@
 <%= form_with(model: user, local: true) do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
-      <h2>以下のエラーが発生したため<%= user.new_record? ? '登録' : '更新' %>できませんでした。</h2>
+      <h4>以下のエラーが発生したため<%= user.new_record? ? '登録' : '更新' %>できませんでした。</h2>
 
       <ul>
       <% user.errors.full_messages.each do |message| %>
@@ -11,22 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class='form-group col-md-4'>
+    <%= form.text_field(:name, placeholder: '名前', class: 'form-control') %>
   </div>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
+  <div class='form-group col-md-4'>
+    <%= form.text_field(:email, placeholder: 'メールアドレス', class: 'form-control') %>
   </div>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
+  <div class='form-group col-md-4'>
+    <%= form.password_field(:password, placeholder: 'パスワード', class: 'form-control') %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class='form-group col-md-4'>
+    <%= form.submit(class: 'btn btn-secondary') %>
   </div>
 <% end %>

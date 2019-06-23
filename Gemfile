@@ -12,6 +12,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'sorcery'
 gem 'rails-i18n'
+gem 'bootstrap'
 
 group :development, :test do
   gem 'rspec-rails'
