@@ -5,6 +5,23 @@ describe SessionsController do
     User.create(email: 'admin_email', name: 'admin', password: 'pass', admin_flg: true)
   end
 
+  describe '#new' do
+    subject { get(:new) }
+
+    context 'ログインしていない場合' do
+      it 'ログインページが表示されること' do
+        is_expected.to render_template(:new)
+      end
+    end
+
+    context 'ログインしている場合' do
+      before { session[:user_id] = user.id }
+      it 'ツイート一覧ページが表示されること' do
+        is_expected.to redirect_to(tweets_path)
+      end
+    end
+  end
+
   describe '#create' do
     subject do
       post(:create, params: post_params)
