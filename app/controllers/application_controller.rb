@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   def login?
     current_user.present?
   end
+  helper_method :login?
 
   def admin?
     current_user.try(:admin_flg)
