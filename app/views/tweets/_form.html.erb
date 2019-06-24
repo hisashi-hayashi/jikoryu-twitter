@@ -1,22 +1,25 @@
-<%= form_with(model: tweet, local: true) do |form| %>
-  <%= form.hidden_field(:parent_id, value: form.object.parent_id) %>
-  <% if tweet.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(tweet.errors.count, "error") %> prohibited this tweet from being saved:</h2>
+<div class='mx-auto' style='max-width: 500px'>
+  <h4>ツイートする</h4>
+  <%= form_with(model: tweet, local: true) do |form| %>
+    <% if tweet.errors.any? %>
+      <div id="error_explanation">
+        <h5>以下のエラーが発生したため<%= tweet.new_record? ? '登録' : '更新' %>できませんでした。</h5>
 
-      <ul>
-      <% tweet.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+          <% tweet.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.text_area(:comment, size: '70x6', style: 'resize: none') %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit('ツイート', class: 'btn btn-secondary') %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.text_area(:comment, size: '70x6', style: 'resize: none') %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit('ツイート') %>
-  </div>
-<% end %>
+  <%= link_to '戻る', tweets_path %>
+</div>

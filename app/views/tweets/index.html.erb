@@ -1,3 +1,7 @@
-<% @tweets.each do |tweet| %>
-  <%= put_tweet(tweet) %>
+<% if @tweets.blank? %>
+  <p>ツイートがありません。</p>
+<% else%>
+  <% @tweets.each do |tweet| %>
+    <%= put_tweet(tweet) %>
+  <% end %>
 <% end %>
