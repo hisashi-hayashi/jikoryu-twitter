@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
-  has_many :tweets
+  has_many :tweets, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
