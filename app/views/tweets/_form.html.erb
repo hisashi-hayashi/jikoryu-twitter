@@ -1,6 +1,8 @@
 <div class='mx-auto' style='max-width: 500px'>
   <h4>ツイートする</h4>
   <%= form_with(model: tweet, local: true) do |form| %>
+    <%= form.hidden_field(:parent_id, value: form.object.parent_id) %>
+
     <% if tweet.errors.any? %>
       <div id="error_explanation">
         <h5>以下のエラーが発生したため<%= tweet.new_record? ? '登録' : '更新' %>できませんでした。</h5>
