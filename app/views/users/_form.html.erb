@@ -1,29 +1,35 @@
-<%= form_with(model: user, local: true) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h4>以下のエラーが発生したため<%= user.new_record? ? '登録' : '更新' %>できませんでした。</h2>
+<div class='mx-auto' style='max-width:500px; margin-top: 25%'>
+  <div class='my-auto'>
+    <h4>ユーザー<%= user.new_record? ? '登録' : '更新' %></h4>
+    <%= form_with(model: user, local: true) do |form| %>
+      <% if user.errors.any? %>
+        <div id="error_explanation">
+          <h5>以下のエラーが発生したため<%= user.new_record? ? '登録' : '更新' %>できませんでした。</h5>
 
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+            <% user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class='form-group col-md-4'>
-    <%= form.text_field(:name, placeholder: '名前', class: 'form-control') %>
-  </div>
+      <div class='form-group'>
+        <%= form.text_field(:name, placeholder: '名前', class: 'form-control') %>
+      </div>
 
-  <div class='form-group col-md-4'>
-    <%= form.text_field(:email, placeholder: 'メールアドレス', class: 'form-control') %>
-  </div>
+      <div class='form-group'>
+        <%= form.text_field(:email, placeholder: 'メールアドレス', class: 'form-control') %>
+      </div>
 
-  <div class='form-group col-md-4'>
-    <%= form.password_field(:password, placeholder: 'パスワード', class: 'form-control') %>
-  </div>
+      <div class='form-group'>
+        <%= form.password_field(:password, placeholder: 'パスワード', class: 'form-control') %>
+      </div>
 
-  <div class='form-group col-md-4'>
-    <%= form.submit(class: 'btn btn-secondary') %>
+      <div class='form-group'>
+        <%= form.submit(class: 'btn btn-secondary') %>
+      </div>
+    <% end %>
+    <%= link_to '戻る', user.new_record? ? new_login_path : users_path%>
   </div>
-<% end %>
+</div>
