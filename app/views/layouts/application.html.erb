@@ -36,10 +36,12 @@
       </nav>
     <% end %>
     <div class='container'>
-      <div>
-        <p id='notice'><%= flash[:notice] %></p>
-        <p id='alert'><%= flash[:alert] %></p>
-      </div>
+      <% if flash[:notice] %>
+        <div class='alert alert-success'><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class='alert alert-danger'><%= flash[:alert] %></div>
+      <% end %>
       <%= yield %>
     </div>
   </body>
