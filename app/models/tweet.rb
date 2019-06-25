@@ -13,7 +13,7 @@ class Tweet < ApplicationRecord
 
   def reply
     results = []
-    children.each do |child|
+    children.where(display_flg: true).each do |child|
       if child.children.present?
         results << child
         results << child.reply

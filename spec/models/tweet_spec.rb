@@ -17,6 +17,7 @@ describe Tweet do
       reply3 = reply1.children.create(user_id: user.id, comment: 'reply3')
       reply1.children.create(user_id: user.id, comment: 'reply4')
       reply3.children.create(user_id: user.id, comment: 'reply5')
+      reply3.children.create(user_id: user.id, comment: 'reply6', display_flg: false)
     end
     context '正常系' do
       let(:expect_reply) do
