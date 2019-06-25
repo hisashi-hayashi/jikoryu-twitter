@@ -54,4 +54,38 @@ describe Tweet do
       end
     end
   end
+
+  describe '#validate' do
+    let(:tweet) { user.tweets.create(comment: 'tweet') }
+    subject do
+      tweet.comment = comment
+      tweet.valid?
+    end
+
+    context '正常系' do
+      let(:comment) { 'a' * 300 }
+
+      it 'trueが返されること' do
+        is_expected.to eq(true)
+      end
+    end
+
+    context '異常系' do
+      context 'commentに空文字を入力した場合' do
+        let(:comment) { '' }
+
+        it 'falseが返されること' do
+          is_expected.to eq(false)
+        end
+      end
+
+      context 'commentに301文字入力した場合' do
+        let(:comment) { 'a' * 301 }
+
+        it 'falseが返されること' do
+          is_expected.to eq(false)
+        end
+      end
+    end
+  end
 end

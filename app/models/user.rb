@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   has_many :tweets, dependent: :destroy
 
-  validates :name, presence: true, uniqueness: true
-  validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, if: -> { new_record? || changes[:crypted_password] }
+  validates :name, presence: true, uniqueness: true, length: { maximum: 100 }
+  validates :email, presence: true, uniqueness: true, length: { maximum: 100 }
+  validates :password, presence: true, length: { maximum: 100 }, if: -> { new_record? || changes[:crypted_password] }
 end
