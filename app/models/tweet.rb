@@ -4,7 +4,7 @@ class Tweet < ApplicationRecord
   belongs_to :parent, class_name: :Tweet, optional: true
   has_many :children, class_name: :Tweet, foreign_key: :parent_id, dependent: :destroy
 
-  validates :comment, presence: true
+  validates :comment, presence: true, length: { maximum: 300 }
   validate :validate_update_parent_id, if: :persisted?
 
   def my_teet?(id)
